@@ -45,8 +45,16 @@ If you have done above instructions you are ready for rest part. Let's begin:
 
 ### Work with a brand-new collection:
 
-If we want to create an new collection and index specific docs we can use this option (creating core). 
+#### The Steps:
+1. Start Solr
+2. Create a new Core/Collection/Cloud
+3. Index own data (Post) to Solr
+4. Edit Data Field Type (Schema)
+5. Query, Query, Query and Fun!
 
+
+If we want to create an new collection and index specific docs we can use this option (creating core). 
+! You can reach the script with [this](https://gist.github.com/molcay/6cc49aaa0885a9e81940) which we will use during implementation.
 * Before create a core we need to start the Solr server to do that in command line simply type: 
 > bin/solr start
 
@@ -54,7 +62,12 @@ If we want to create an new collection and index specific docs we can use this o
 > bin/solr create_core -c haberler
 
 * After the creation of core we can `edit` `server/solr/<CORE-NAME>/conf/managed-schema` file for the proper field type. If we do it after `POST` operation its more easy because it can handle fields automaticly, almost fine (edit location much lesser then add them manually).
-
+```xml
+<field name="title" type="text_tr" indexed="true"/>
+<field name="category" type="string" indexed="true"/>
+<field name="content" type="text_tr" indexed="true"/>
+<field name="length" type="string" indexed="true"/>
+```
 * to `POST` a single file or bunch of files you can simply say `bin/post -c`**`<CORE-NAME> <PATH-FOR-IMPORT-FILE(s)>`**: 
 > bin/post -c haberler ~/Desktop/result.json
 
@@ -67,3 +80,48 @@ If we want to create an new collection and index specific docs we can use this o
 * The posting steps can be tricky. Because you need the specify `.jar` file for POST operation as well as the **`<CORE-NAME>`** and **`<PATH-FOR-IMPORT-FILE(s)>`**. to do that simply say `java -Dtype=application/json -Dc=`**`<CORE-NAME>`**` -jar `**`<POST-JAR-PATH> <PATH-FOR-IMPORT-FILE(s)>`**
 
 > java -Dtype=application/json -Dc=haberler -jar ../example/exampledocs/post.jar ~/Desktop/result.json
+
+
+
+
+## Example
+**Python 2.x**
+```python
+# *-* coding: utf-8 *-*
+import json
+import urllib
+
+__CORE_NAME__ = "haberler"
+
+def get_result(search_term, category="*", page=0):
+	search_term = search_term.replace(' ', "+")
+	search_url = "http://localhost:8983/solr/{0}/select?q={1}&wt=json&indent=true".format(__CORE_NAME__, search_term)
+	search_resp = urllib.urlopen(search_url)
+	result = json.loads(search_resp.read())
+	return result
+
+result = get_result("ankara")
+
+print(json.dumps(result['response']['numFound'], indent=4))
+```
+**Ruby**
+```ruby
+require 'net/http'
+require 'json'
+
+
+def get_result(search_term, corename="haberler")
+	str_url = "http://localhost:8983/solr/#{corename}/select?q=#{search_term}&wt=json&indent=true"
+	# puts str_url
+	url = URI.parse(str_url)
+	req = Net::HTTP::Get.new(url.to_s)
+	res = Net::HTTP.start(url.host, url.port) {|http|
+	  http.request(req)
+	}
+	return res.body
+end
+
+result = get_result "ankara"
+
+puts JSON.parse(result)['response']['numFound']
+```
