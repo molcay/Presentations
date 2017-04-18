@@ -1,0 +1,110 @@
+#thanks .github-icon, #thanks .email-icon {
+    display: inline-block;
+    -webkit-transition: 0.5s;
+    -moz-transition:    0.5s;
+    -ms-transition:     0.5s;
+    -o-transition:      0.5s;
+    transition:         0.5s;
+}
+
+
+#thanks.present .github-icon {
+    -webkit-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    -o-transform: scale(1.5);
+    transform: scale(1.5);
+
+    -webkit-transition-delay: 0.5s;
+    -moz-transition-delay: 0.5s;
+    -ms-transition-delay: 0.5s;
+    -o-transition-delay: 0.5s;
+    transition-delay: 0.5s;
+}
+
+#thanks.present .email-icon {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform:    rotate(-45deg);
+    -ms-transform:     rotate(-45deg);
+    -o-transform:      rotate(-45deg);
+    transform:         rotate(-22.5deg);
+
+    -webkit-transition-delay: 0.5s;
+    -moz-transition-delay:    0.5s;
+    -ms-transition-delay:     0.5s;
+    -o-transition-delay:      0.5s;
+    transition-delay:         0.5s;
+}
+
+
+
+
+
+#thanks span,
+#thanks b {
+    display: inline-block;
+    -webkit-transform: translateZ(90px);
+    -moz-transform:    translateZ(90px);
+    -ms-transform:     translateZ(90px);
+    -o-transform:      translateZ(90px);
+     transform:        translateZ(90px);
+
+    -webkit-transition: 0.5s;
+    -moz-transition:    0.5s;
+    -ms-transition:     0.5s;
+    -o-transition:      0.5s;
+    transition:         0.5s;
+}
+
+#thanks .firstname {
+    -webkit-transform: translateZ(-90px);
+    -moz-transform:    translateZ(-90px);
+    -ms-transform:     translateZ(-90px);
+    -o-transform:      translateZ(-90px);
+    transform:         translateZ(-90px);
+}
+
+#thanks .middlename {
+    -webkit-transform: translateZ(90px);
+    -moz-transform:    translateZ(90px);
+    -ms-transform:     translateZ(90px);
+    -o-transform:      translateZ(90px);
+    transform:         translateZ(90px);
+}
+
+#thanks .lastname {
+    -webkit-transform: translateZ(-90px);
+    -moz-transform:    translateZ(-90px);
+    -ms-transform:     translateZ(-90px);
+    -o-transform:      translateZ(-90px);
+    transform:         translateZ(-90px);
+}
+
+#thanks .footnote {
+    font-size: 32px;
+
+    -webkit-transform: translateZ(-50px);
+    -moz-transform:    translateZ(-50px);
+    -ms-transform:     translateZ(-50px);
+    -o-transform:      translateZ(-50px);
+    transform:         translateZ(-50px);
+}
+
+#thanks.present span,
+#thanks.present b {
+    -webkit-transform: translateZ(0px);
+    -moz-transform:    translateZ(0px);
+    -ms-transform:     translateZ(0px);
+    -o-transform:      translateZ(0px);
+    transform:         translateZ(0px);
+}
+
+li:before {
+    font-family: FontAwesome;
+    content: "\f111";
+    display: block;
+    float: left;
+    width: 1.2em;
+    color: #90caf9;
+
+}
