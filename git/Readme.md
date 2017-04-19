@@ -64,6 +64,42 @@ git help [command] (e.g: git help config)
 
 !!! Create new Remote Repository on GitLab to see recommended commands.
 
+3. Use Case: Discard Local Changes
+* to check any changes in your **Working Directory**: `git status`
+* We assume that there is a file which is deleted or changed unintendedly. If you want to revert (discard) this change: `git checkout -- $filename`
+
+4. Use Case: Revert Staging Area
+* to check any changes in your **Staging Area**: `git status`
+*  We assume that there is a file which is deleted or changed unintendedly. and you send the file to **Staging Area**. After that you wan to revert the process:
+```
+git reset HEAD $filename
+git checkout -- $filename
+```
+
+5. Use Case: Return any of Previous Versions:
+```
+git checkout $hashofcommit -- .
+```
+
+---
+
+* .gitignore
+```
+# Directories
+.idea/*
+databases/*
+
+!databases/sql.dump
+```
+
+* Readme.md
+* Branches
+* Issues
+* Wiki
+* Awesome-*
+
+
+
 #### Git Cheat Sheet:
 ![Git Cheat Sheet](images/Git%20Cheat%20Sheet.png)
 
