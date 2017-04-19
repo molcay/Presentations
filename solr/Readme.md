@@ -82,8 +82,6 @@ If we want to create an new collection and index specific docs we can use this o
 > java -Dtype=application/json -Dc=haberler -jar ../example/exampledocs/post.jar ~/Desktop/result.json
 
 
-
-
 ## Example
 **Python 2.x**
 ```python
@@ -104,6 +102,7 @@ result = get_result("ankara")
 
 print(json.dumps(result['response']['numFound'], indent=4))
 ```
+
 **Ruby**
 ```ruby
 require 'net/http'
@@ -116,7 +115,7 @@ def get_result(search_term, corename="haberler")
 	url = URI.parse(str_url)
 	req = Net::HTTP::Get.new(url.to_s)
 	res = Net::HTTP.start(url.host, url.port) {|http|
-	  http.request(req)
+		http.request(req)
 	}
 	return res.body
 end
@@ -125,3 +124,250 @@ result = get_result "ankara"
 
 puts JSON.parse(result)['response']['numFound']
 ```
+
+---
+
+
+## Faceted Search in Solr:
+
+* Assume that we search for `ankara`:
+> http://localhost:8983/solr/haberler/select?indent=on&q=ankara&wt=json
+
+
+* Only one facet field:
+```
+&facet=true
+	 &facet.field=category
+```
+> http://localhost:8983/solr/haberler/select?indent=on&q=ankara&wt=json&facet=true&facet.field=category
+
+Output:
+>>>
+    {
+      "responseHeader":{
+        "status":0,
+        "QTime":19,
+        "params":{
+          "q":"ankara",
+          "facet.field":"category",
+          "indent":"on",
+          "wt":"json",
+          "facet":"true"}},
+      "response":{"numFound":2579,"start":0,"docs":[{...}, {...}, {...}, ...]
+      },
+      "facet_counts":{
+        "facet_queries":{},
+        "facet_fields":{
+          "category":[
+            "genel",625,
+            "guncel",513,
+            "spor",372,
+            "siyaset",254,
+            "ekonomi",221,
+            "turkiye",187,
+            "planet",110,
+            "kultur-sanat",86,
+            "dunya",73,
+            "saglik",54,
+            "magazin",41,
+            "yasam",35,
+            "teknoloji",8]},
+        "facet_ranges":{},
+        "facet_intervals":{},
+        "facet_heatmaps":{}}
+    }
+>>>
+
+
+* Two facet fields:
+```
+&facet=true
+	 &facet.field=category
+	 &facet.field=length
+```
+> http://localhost:8983/solr/haberler/select?indent=on&q=ankara&wt=json&facet=true&facet.field=category&facet.field=length
+
+Output:
+>>>
+    {
+      "responseHeader":{
+        "status":0,
+        "QTime":2,
+        "params":{
+          "q":"ankara",
+          "facet.field":["category",
+            "length"],
+          "indent":"on",
+          "wt":"json",
+          "facet":"true"}},
+      "response":{"numFound":2579,"start":0,"docs":[{...}, {...}, {...}, ...]
+      },
+      "facet_counts":{
+        "facet_queries":{},
+        "facet_fields":{
+          "category":[
+            "genel",625,
+            "guncel",513,
+            "spor",372,
+            "siyaset",254,
+            "ekonomi",221,
+            "turkiye",187,
+            "planet",110,
+            "kultur-sanat",86,
+            "dunya",73,
+            "saglik",54,
+            "magazin",41,
+            "yasam",35,
+            "teknoloji",8],
+          "length":[
+            "uzun",1501,
+            "kısa",1078]},
+        "facet_ranges":{},
+        "facet_intervals":{},
+        "facet_heatmaps":{}}
+    }
+>>>
+
+* Filter Result according to query:
+
+All news contains `ankara` under category `genel` 
+> http://localhost:8983/solr/haberler/select?indent=on&q=ankara&wt=json&facet=on&facet.field=length&fq=category:genel
+
+Output:
+>>>
+    {
+    "responseHeader":{
+      "status":0,
+      "QTime":0,
+      "params":{
+        "q":"ankara",
+        "facet.field":"length",
+        "indent":"on",
+        "fq":"category:genel",
+        "wt":"json",
+        "facet":"on"}},
+    "response":{"numFound":625,"start":0,"docs":[{...}, {...}, ...]
+    },
+    "facet_counts":{
+      "facet_queries":{},
+      "facet_fields":{
+        "length":[
+          "uzun",387,
+          "kısa",238]},
+      "facet_ranges":{},
+      "facet_intervals":{},
+      "facet_heatmaps":{}}
+      }
+>>>
+
+All news contains `ankara` under category `genel` and length is `uzun`
+> http://localhost:8983/solr/haberler/select?indent=on&q=ankara&wt=json&facet=on&fq=category:genel&fq=length:uzun
+
+Output:
+>>>
+    {
+    "responseHeader":{
+      "status":0,
+      "QTime":0,
+      "params":{
+        "q":"ankara",
+        "indent":"on",
+        "fq":["category:genel",
+          "length:uzun"],
+        "wt":"json",
+        "facet":"on"}},
+    "response":{"numFound":387,"start":0,"docs":[{...}, {...}, {...}, ...]
+    },
+    "facet_counts":{
+      "facet_queries":{},
+      "facet_fields":{},
+      "facet_ranges":{},
+      "facet_intervals":{},
+      "facet_heatmaps":{}}
+      }
+>>>
+
+---
+---
+---
+---
+---
+
+* Query Facet:
+
+to do that lets stop our core and start `techproducts` example:
+> http://localhost:8983/solr/techproducts/select?facet=on&indent=on&q=*:*&wt=json
+- add this to url: 
+```
+&facet=true
+	 &facet.query=price:[* TO 100]
+	 &facet.query=price:[100 TO 200]
+	 &facet.query=price:[200 TO 300]
+	 &facet.query=price:[300 TO 400]
+	 &facet.query=price:[400 TO 500]
+	 &facet.query=price:[500 TO *]
+```
+- after Addition:
+> http://localhost:8983/solr/techproducts/select?facet=on&indent=on&q=*:*&wt=json&facet=true&facet.query=price:[*%20TO%20100]&facet.query=price:[100%20TO%20200]&facet.query=price:[200%20TO%20300]&facet.query=price:[300%20TO%20400]&facet.query=price:[400%20TO%20500]&facet.query=price:[500%20TO%20*]
+
+Output:
+>>>
+    {
+    "responseHeader":{
+      "status":0,
+      "QTime":1,
+      "params":{
+        "facet.query":["price:[* TO 100]",
+          "price:[100 TO 200]",
+          "price:[200 TO 300]",
+          "price:[300 TO 400]",
+          "price:[400 TO 500]",
+          "price:[500 TO *]"],
+        "q":"*:*",
+        "indent":"on",
+        "facet":["on",
+          "true"],
+        "wt":"json"}},
+    "response":{"numFound":32,"start":0,"docs":[{...}, {...}, {...}, ...]
+    },
+    "facet_counts":{
+      "facet_queries":{
+        "price:[* TO 100]":7,
+        "price:[100 TO 200]":2,
+        "price:[200 TO 300]":1,
+        "price:[300 TO 400]":3,
+        "price:[400 TO 500]":1,
+        "price:[500 TO *]":2},
+      "facet_fields":{},
+      "facet_ranges":{},
+      "facet_intervals":{},
+      "facet_heatmaps":{}}
+    }
+>>>
+
+Filter Query:
+> http://localhost:8983/solr/techproducts/select?facet=on&indent=on&q=*:*&wt=json&facet=true&fq=price:[300%20TO%20400]
+
+>>>
+    {
+    "responseHeader":{
+      "status":0,
+      "QTime":3,
+      "params":{
+        "q":"*:*",
+        "indent":"on",
+        "fq":"price:[300 TO 400]",
+        "facet":["on",
+          "true"],
+        "wt":"json"}},
+    "response":{"numFound":3,"start":0,"docs":[{...}, {...}, {...}]
+    },
+    "facet_counts":{
+      "facet_queries":{},
+      "facet_fields":{},
+      "facet_ranges":{},
+      "facet_intervals":{},
+      "facet_heatmaps":{}}
+    }
+
+>>>
