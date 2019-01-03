@@ -1,13 +1,16 @@
 {
-  "main.js": "/Presentations/docker/static/js/main.9c5c56d0.chunk.js",
-  "main.js.map": "/Presentations/docker/static/js/main.9c5c56d0.chunk.js.map",
-  "static/css/1.5c334e79.chunk.css": "/Presentations/docker/static/css/1.5c334e79.chunk.css",
-  "static/js/1.2e448b0b.chunk.js": "/Presentations/docker/static/js/1.2e448b0b.chunk.js",
-  "static/js/1.2e448b0b.chunk.js.map": "/Presentations/docker/static/js/1.2e448b0b.chunk.js.map",
-  "runtime~main.js": "/Presentations/docker/static/js/runtime~main.b2f6c54b.js",
-  "runtime~main.js.map": "/Presentations/docker/static/js/runtime~main.b2f6c54b.js.map",
-  "static/css/1.5c334e79.chunk.css.map": "/Presentations/docker/static/css/1.5c334e79.chunk.css.map",
-  "index.html": "/Presentations/docker/index.html",
-  "precache-manifest.22776bedd38c1dc2623a97e1724c86a5.js": "/Presentations/docker/precache-manifest.22776bedd38c1dc2623a97e1724c86a5.js",
-  "service-worker.js": "/Presentations/docker/service-worker.js"
+  "main.js": "/static/js/main.0473c9b5.chunk.js",
+  "main.js.map": "/static/js/main.0473c9b5.chunk.js.map",
+  "static/css/1.298e9d4b.chunk.css": "/static/css/1.298e9d4b.chunk.css",
+  "static/js/1.e4a655b2.chunk.js": "/static/js/1.e4a655b2.chunk.js",
+  "static/js/1.e4a655b2.chunk.js.map": "/static/js/1.e4a655b2.chunk.js.map",
+  "runtime~main.js": "/static/js/runtime~main.229c360f.js",
+  "runtime~main.js.map": "/static/js/runtime~main.229c360f.js.map",
+  "static/media/vm-architecture.png": "/static/media/vm-architecture.b358e131.png",
+  "static/media/docker-architecture.png": "/static/media/docker-architecture.97b5b07e.png",
+  "static/media/docker-daemon.png": "/static/media/docker-daemon.f48b2c53.png",
+  "static/css/1.298e9d4b.chunk.css.map": "/static/css/1.298e9d4b.chunk.css.map",
+  "index.html": "/index.html",
+  "precache-manifest.9f7d7ec361018057c98546425317134e.js": "/precache-manifest.9f7d7ec361018057c98546425317134e.js",
+  "service-worker.js": "/service-worker.js"
 }

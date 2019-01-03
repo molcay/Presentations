@@ -8,7 +8,7 @@ export default ({ titles }) => {
       <ul>
         {
           titles.map(title => (
-            <li className={(title.isCompleted ? 'completed' : '')}>{title.text}</li>
+            <li className={(title.isCompleted ? 'completed' : '')} key={title.text}>{title.text}</li>
           ))
         }
       </ul>
