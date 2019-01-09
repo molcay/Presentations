@@ -63,6 +63,17 @@ $ docker container ls # list containers
       docker run -p 9042:9042 --name mycassandra cassandra
       ```
       > this command create a docker container and name it as `mycassandra`. at any point in time you can _**start**_, _**stop**_, _**restart**_ the container with name. If you omit `--name` parameter docker set a random 2-word name to a container.
+    
+    - you can bind volumes(mount a path from host to a container's path) with `docker run`
+      ```bash
+      docker run -v <PATH_TO_HOST_FOLDER>:<PATH_TO_CONTAINER_FOLDER> ubuntu
+      ```
+      > `<PATH_TO_HOST_FOLDER>` and `<PATH_TO_CONTAINER_FOLDER>` needs to be absolute path of the folder. You can use `$(pwd)` to get current working dir for `<PATH_TO_HOST_FOLDER>`, or `$HOME` get your user's home dir
+    
+    - you can pass an environment variable to image (actually container)
+      ```bash
+      docker -e VAR1=value1 ubuntu
+      ```
 
 > NOTE: when an image runs, you will get a container.
 
