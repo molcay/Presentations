@@ -14,7 +14,15 @@ List of some basic command of docker cli.
 ```bash
 $ docker pull ubuntu
 
-$ docker run -p 3306:3306 -v $(pwd)/mysql-data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=toor -e MYSQL_DATABASE=SpringTEST -e MYSQL_USER=test_user -e MYSQL_PASSWORD=root -d --name mysql_for_spring mysql
+$ docker run -p 3306:3306 \
+             -v $(pwd)/mysql-data:/var/lib/mysql \
+             -e MYSQL_ROOT_PASSWORD=toor \
+             -e MYSQL_DATABASE=SpringTEST \
+             -e MYSQL_USER=test_user \
+             -e MYSQL_PASSWORD=root \
+             -d \
+             --name mysql_for_spring \
+             mysql
 
 $ docker ps
 
