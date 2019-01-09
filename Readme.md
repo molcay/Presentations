@@ -1,5 +1,5 @@
 # My Presentations Repository
 
-1. [Solr](solr/README.md)
-2. [Git](git/README.md)
-3. [Docker](docker/README.md)
+1. [Solr](solr/Readme.md)
+2. [Git](git/Readme.md)
+3. [Docker](docker/Readme.md)
