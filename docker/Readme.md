@@ -138,8 +138,14 @@ $ docker container ls # list containers
 ---
 
 ## Dockerfile
-TODO
+* `Dockerfile` Syntax ## TODO
 
+* build `image` from a `Dockerfile`
+  ``` 
+  docker build -f <DOCKERFILE_PATH> -t <IMAGE_NAME:TAG> <CONTEXT>
+  # docker build -f sa-webapp/Dockerfile -t linovi/sa-webapp sa-webapp
+  ```
+  
 ---
 
 ## Docker Compose
