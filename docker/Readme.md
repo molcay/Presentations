@@ -138,7 +138,9 @@ $ docker container ls # list containers
 ---
 
 ## Dockerfile
-* `Dockerfile` Syntax ## TODO
+> Source code is available [here](https://github.com/molcay/DockerPresentationDemo).
+* `Dockerfile` Syntax 
+!!! TODO
 
 * build `image` from a `Dockerfile`
   ``` 
@@ -149,4 +151,6 @@ $ docker container ls # list containers
 ---
 
 ## Docker Compose
-TODO
+> Source code is available [here](https://github.com/molcay/DockerPresentationDemo/tree/compose).
+
+!!! TODO
