@@ -138,9 +138,73 @@ $ docker container ls # list containers
 ---
 
 ## Dockerfile
-TODO
+> Source code is available [here](https://github.com/molcay/DockerPresentationDemo).
+* `Dockerfile` Sample 
+  ```Dockerfile
+  # extend image (base image)
+  FROM python:3.6.6-alpine
 
+  # Copy source file to container
+  COPY sa /app
+
+  # Change working directory in container
+  WORKDIR /app
+
+  # Install dependencies
+  RUN pip3 install -r requirements.txt && \
+    python3 -m textblob.download_corpora
+
+  # Expose 5000 port (actually do nothing, this is for documentation purposes only)
+  EXPOSE 5000
+
+  # Sets the command and parameters that will be executed first when a container is run.
+  ENTRYPOINT ["python3"]
+
+  # Parameters for the ENTRYPOINT
+  CMD ["sentiment_analysis.py"]
+  ```
+
+* Extended `Dockerfile` sample
+  ```Dockerfile
+  # Step 1: Build
+  FROM maven:3-jdk-8-alpine as builder
+
+  # Copy source file to container
+  COPY ./ /app/build/
+
+  # Change working directory in container
+  WORKDIR /app/build/
+
+  # Package application
+  RUN mvn install
+
+  # Step 2: Publish
+  FROM openjdk:8-jre-alpine
+
+  # Environment Variable that defines the endpoint of sentiment-analysis python api.
+  ENV SA_LOGIC_API_URL http://localhost:5000
+
+  # Copy packaged application from builder step to /app/ folder
+  COPY --from=builder /app/build/target/sentiment-analysis-web-0.0.1-SNAPSHOT.jar /app/
+
+  # Change working directory in container
+  WORKDIR /app/
+
+  # Expose 8080 port (actually do nothing, this is for documentation purposes only)
+  EXPOSE 8080
+
+  CMD ["java", "-jar", "sentiment-analysis-web-0.0.1-SNAPSHOT.jar", "--sa.logic.api.url=${SA_LOGIC_API_URL}"]
+  ```
+
+* build `image` from a `Dockerfile`
+  ``` 
+  docker build -f <DOCKERFILE_PATH> -t <IMAGE_NAME:TAG> <CONTEXT>
+  # docker build -f sa-webapp/Dockerfile -t linovi/sa-webapp sa-webapp
+  ```
+  
 ---
 
 ## Docker Compose
-TODO
+> Source code is available [here](https://github.com/molcay/DockerPresentationDemo/tree/compose).
+
+!!! TODO
