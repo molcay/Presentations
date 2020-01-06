@@ -1,13 +1,60 @@
 <html>
+
 <head>
-	<title>Presentations</title>
+  <title>Presentations| M. Olcay Tercanlı</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css" />
 </head>
+
 <body>
-	<ul>
-		<li> <a href= "solr/index.html" >Solr</a> </li>
-		<li> <a href= "git/index.html" >Git</a> </li>
-		<li> <a href= "docker/index.html" >Docker</a> </li>
-		<li> <a href= "kubernetes/index.html" >Kubernetes</a> </li>
-	</ul>	
+  <div class="bg-navy washed-blue flex justify-center h-100 avenir">
+    <article class="vh-100 dt w-100">
+      <div class="dtc v-mid tc ph3 ph4-l">
+        <div class="mt4 pa4 b--blue" id="presentations">
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <script>
+    const presentations = [
+      {
+        name: 'Solr',
+        destination: 'solr/index.html',
+      },
+      {
+        name: 'Git',
+        destination: 'git/index.html',
+      },
+      {
+        name: 'Docker',
+        destination: 'docker/index.html',
+      },
+      {
+        name: 'Kubernetes',
+        destination: 'kubernetes/index.html',
+      },
+    ]
+
+    presentations.forEach(presentation => {
+      createPresentationDiv(presentation)
+    })
+
+    function createPresentationDiv(presentation) {
+      const a = document.createElement('a')
+      a.setAttribute('class', 'no-underline washed-blue bg-animate bg-near-black hover-bg-gray inline-flex items-center ma2 tc br3 pa3')
+      a.setAttribute('href', presentation.destination)
+      a.setAttribute('target', '_blank')
+
+      const span = document.createElement('span')
+      span.setAttribute('class', 'f5 ml1 mr1 pl2 pr2')
+      span.innerText = presentation.name
+
+      a.appendChild(span)
+
+      document.getElementById('presentations').appendChild(a)
+    }
+  </script>
 </body>
+
 </html>
