@@ -15,12 +15,21 @@
           a.appendChild(r);
       })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
   </script>
+  <style>
+    div.bg-olcay {
+      background-color: #123456;
+    }
+    a.bg-olcay {
+      background-color: #456789;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="bg-navy washed-blue flex justify-center h-100 avenir">
+  <div class="bg-olcay washed-blue flex justify-center h-100 avenir">
     <article class="vh-100 dt w-100">
       <div class="dtc v-mid tc ph3 ph4-l">
+        <h2 class="f2">Here are presentations from me</h1>
         <div class="mt4 pa4 b--blue" id="presentations">
         </div>
       </div>
@@ -31,19 +40,19 @@
     const presentations = [
       {
         name: 'Solr',
-        destination: 'solr/index.html',
+        destination: 'solr',
       },
       {
         name: 'Git',
-        destination: 'git/index.html',
+        destination: 'git',
       },
       {
         name: 'Docker',
-        destination: 'docker/index.html',
+        destination: 'docker',
       },
       {
         name: 'Kubernetes',
-        destination: 'kubernetes/index.html',
+        destination: 'kubernetes',
       },
     ]
 
@@ -53,8 +62,8 @@
 
     function createPresentationDiv(presentation) {
       const a = document.createElement('a')
-      a.setAttribute('class', 'no-underline washed-blue bg-animate bg-near-black hover-bg-gray inline-flex items-center ma2 tc br3 pa3')
-      a.setAttribute('href', presentation.destination)
+      a.setAttribute('class', 'no-underline washed-blue bg-animate bg-olcay hover-bg-gray inline-flex items-center ma2 tc br3 pa3')
+      a.setAttribute('href', `${presentation.destination}/index.html`)
       a.setAttribute('target', '_blank')
 
       const span = document.createElement('span')
