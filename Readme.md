@@ -1,6 +1,8 @@
 # My Presentations Repository
 
-1. [Solr](solr/Readme.md)
-2. [Git](git/Readme.md)
-3. [Docker](docker/Readme.md)
-4. [Kubernetes](kubernetes/Readme.md)
+This repository contains the source code of the [presentations.tercanli.com](https://presentations.tercanli.com). 
+
+Also I put my presentations here.
+
+## Presentations
+[TBD]
